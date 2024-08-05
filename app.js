@@ -7,6 +7,8 @@ const http = require('http');
 
 require('dotenv').config();
 
+const {connectToMongoDB} = require("./db/db");
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -42,7 +44,7 @@ app.use(function(err, req, res, next) {
 });
 
 const server = http.createServer(app);
-server.listen(5000,()=>{console.log("app is running on port 5000") });
+server.listen(process.env.PORT,()=>{connectToMongoDB(), console.log("app is running on port 5000") });
 
 
 
